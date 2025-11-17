@@ -530,6 +530,10 @@ export interface ContentBlock {
         id?: string | null;
       }[]
     | null;
+  style?: ('default' | 'gradient' | 'background') | null;
+  overlap?: number | null;
+  paddingTop?: number | null;
+  paddingBottom?: number | null;
   id?: string | null;
   blockName?: string | null;
   blockType: 'content';
@@ -1148,6 +1152,10 @@ export interface ContentBlockSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  style?: T;
+  overlap?: T;
+  paddingTop?: T;
+  paddingBottom?: T;
   id?: T;
   blockName?: T;
 }

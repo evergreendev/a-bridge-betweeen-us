@@ -56,6 +56,10 @@ const config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       colors: {
+        brand:{
+          blue: '#0d1e51',
+          red: '#c1272d'
+        },
         accent: {
           DEFAULT: 'hsl(var(--accent))',
           foreground: 'hsl(var(--accent-foreground))',

@@ -7,7 +7,7 @@ import type { ContentBlock as ContentBlockProps } from '@/payload-types'
 import { CMSLink } from '../../components/Link'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
-  const { columns } = props
+  const { columns, overlap = 0, style = 'default', paddingBottom = 28, paddingTop = 28 } = props
 
   const colsSpanClasses = {
     full: '12',
@@ -16,9 +16,22 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
     twoThirds: '8',
   }
 
+  const styleClasses = {
+    default: '',
+    gradient: 'bg-gradient-to-t from-brand-blue from-60% to-transparent to-100% text-white',
+    background: '',
+  }
+
   return (
-    <div className="container my-16">
-      <div className="grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
+    <div
+      style={{
+        marginTop: overlap ? '-' + overlap + 'px' : undefined,
+        paddingBottom: paddingBottom + 'px',
+        paddingTop: paddingTop + 'px',
+      }}
+      className={`my-16 ${styleClasses[style!]}`}
+    >
+      <div className="container grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
@@ -33,7 +46,11 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
               >
                 {richText && <RichText data={richText} enableGutter={false} />}
 
-                {enableLink && <CMSLink {...link} />}
+                {enableLink && (
+                  <div className="text-center mt-6">
+                    <CMSLink {...link} className="text-lg" />
+                  </div>
+                )}
               </div>
             )
           })}

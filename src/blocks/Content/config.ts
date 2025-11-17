@@ -75,5 +75,30 @@ export const Content: Block = {
       },
       fields: columnFields,
     },
+    {
+      name: 'style',
+      type: 'select',
+      defaultValue: 'default',
+      options: [
+        "default",
+        "gradient",
+        "background"
+      ]
+    },
+    {
+      name: 'overlap',
+      type: 'number',
+      defaultValue: 0,
+    },
+    {
+      name: 'paddingTop',
+      type: 'number',
+      defaultValue: 28,
+    },
+    {
+      name: 'paddingBottom',
+      type: 'number',
+      defaultValue: 28,
+    },
   ],
 }
