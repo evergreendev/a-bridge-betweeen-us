@@ -66,3 +66,28 @@ html {
 html[data-theme='light'] {
   opacity: initial;
 }
+
+/* Hero image entrance animation: fade in and pan up slightly */
+@layer utilities {
+  @keyframes hero-fade-pan-up {
+    0% {
+      opacity: 0;
+      transform: translateY(12px) scale(1.02);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .animate-hero-in {
+    animation: hero-fade-pan-up 900ms ease-out both;
+    will-change: transform, opacity;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-hero-in {
+      animation: none;
+    }
+  }
+}
