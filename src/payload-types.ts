@@ -199,7 +199,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | ImageCarousel)[];
   meta?: {
     title?: string | null;
     /**
@@ -784,6 +784,27 @@ export interface Form {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageCarousel".
+ */
+export interface ImageCarousel {
+  slides: {
+    media: number | Media;
+    /**
+     * Alt text for accessibility
+     */
+    alt?: string | null;
+    /**
+     * Optional caption displayed under the image
+     */
+    caption?: string | null;
+    id?: string | null;
+  }[];
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'imageCarousel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1090,6 +1111,7 @@ export interface PagesSelect<T extends boolean = true> {
         mediaBlock?: T | MediaBlockSelect<T>;
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
+        imageCarousel?: T | ImageCarouselSelect<T>;
       };
   meta?:
     | T
@@ -1190,6 +1212,22 @@ export interface FormBlockSelect<T extends boolean = true> {
   form?: T;
   enableIntro?: T;
   introContent?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ImageCarousel_select".
+ */
+export interface ImageCarouselSelect<T extends boolean = true> {
+  slides?:
+    | T
+    | {
+        media?: T;
+        alt?: T;
+        caption?: T;
+        id?: T;
+      };
   id?: T;
   blockName?: T;
 }
