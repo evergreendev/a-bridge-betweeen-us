@@ -4,10 +4,12 @@ import {
   FixedToolbarFeature,
   HeadingFeature,
   InlineToolbarFeature,
+  BlocksFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
 import { link } from '@/fields/link'
+import { ImageCarousel } from '@/blocks/ImageCarousel/config'
 
 const columnFields: Field[] = [
   {
@@ -43,6 +45,9 @@ const columnFields: Field[] = [
           HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
+          BlocksFeature({
+            blocks: [ImageCarousel],
+          }),
         ]
       },
     }),

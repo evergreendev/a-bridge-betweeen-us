@@ -1,12 +1,13 @@
 "use client"
 import React, { useMemo, useState } from 'react'
 import { cn } from '@/utilities/ui'
+import { Media as PayloadMedia } from '@/payload-types'
 import { Media } from '@/components/Media'
 
 type Slide = {
-  media: string | number | null | undefined
-  alt?: string
-  caption?: string
+  media: PayloadMedia | string | number | null | undefined
+  alt?: string | null
+  caption?: string | null
 }
 
 type Props = {
