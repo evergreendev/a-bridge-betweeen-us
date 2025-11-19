@@ -4,10 +4,17 @@ import RichText from '@/components/RichText'
 
 import type { ContentBlock as ContentBlockProps } from '@/payload-types'
 
-import { CMSLink } from '../../components/Link'
+import { CMSLink } from '@/components/Link'
 
 export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
-  const { columns, overlap = 0, style = 'default', paddingBottom = 28, paddingTop = 28 } = props
+  const {
+    columns,
+    overlap = 0,
+    style = 'default',
+    paddingBottom = 28,
+    paddingTop = 28,
+    backgroundImage,
+  } = props
 
   const colsSpanClasses = {
     full: '12',
@@ -19,7 +26,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   const styleClasses = {
     default: '',
     gradient: 'bg-gradient-to-t from-brand-blue from-60% to-transparent to-100% text-white',
-    background: '',
+    background: 'bg-cover bg-center',
   }
 
   return (
@@ -28,8 +35,11 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
         marginTop: overlap ? '-' + overlap + 'px' : undefined,
         paddingBottom: paddingBottom + 'px',
         paddingTop: paddingTop + 'px',
+        backgroundImage:
+          style === 'background' && backgroundImage && typeof backgroundImage !== "number"
+            ? `url(${backgroundImage.url})` : undefined,
       }}
-      className={`my-16 ${styleClasses[style!]}`}
+      className={`${styleClasses[style!]}`}
     >
       <div className="container grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
         {columns &&

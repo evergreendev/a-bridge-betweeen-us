@@ -84,11 +84,15 @@ export const Content: Block = {
       name: 'style',
       type: 'select',
       defaultValue: 'default',
-      options: [
-        "default",
-        "gradient",
-        "background"
-      ]
+      options: ['default', 'gradient', 'background'],
+    },
+    {
+      name: 'backgroundImage',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        condition: (data, siblingData) => siblingData.style === 'background',
+      },
     },
     {
       name: 'overlap',

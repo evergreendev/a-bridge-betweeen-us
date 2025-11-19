@@ -531,6 +531,7 @@ export interface ContentBlock {
       }[]
     | null;
   style?: ('default' | 'gradient' | 'background') | null;
+  backgroundImage?: (number | null) | Media;
   overlap?: number | null;
   paddingTop?: number | null;
   paddingBottom?: number | null;
@@ -1175,6 +1176,7 @@ export interface ContentBlockSelect<T extends boolean = true> {
         id?: T;
       };
   style?: T;
+  backgroundImage?: T;
   overlap?: T;
   paddingTop?: T;
   paddingBottom?: T;
