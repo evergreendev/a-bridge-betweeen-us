@@ -245,6 +245,9 @@ export const seed = async ({
     payload.updateGlobal({
       slug: 'footer',
       data: {
+        facebook: 'https://facebook.com/yourpage',
+        instagram: 'https://instagram.com/yourhandle',
+        email: 'hello@example.com',
         navItems: [
           {
             link: {

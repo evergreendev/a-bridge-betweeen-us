@@ -15,6 +15,31 @@ export const Footer: GlobalConfig = {
     read: () => true,
   },
   fields: [
+    // Social links
+    {
+      name: 'facebook',
+      label: 'Facebook URL',
+      type: 'text',
+      admin: {
+        description: 'Link to your Facebook profile or page (e.g., https://facebook.com/yourpage).',
+      },
+    },
+    {
+      name: 'instagram',
+      label: 'Instagram URL',
+      type: 'text',
+      admin: {
+        description: 'Link to your Instagram profile (e.g., https://instagram.com/yourhandle).',
+      },
+    },
+    {
+      name: 'email',
+      label: 'Contact Email',
+      type: 'email',
+      admin: {
+        description: 'Public contact email to display in the footer.',
+      },
+    },
     {
       name: 'navItems',
       type: 'array',

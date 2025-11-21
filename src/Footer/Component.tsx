@@ -1,6 +1,7 @@
 import { getCachedGlobal } from '@/utilities/getGlobals'
 import Link from 'next/link'
 import React from 'react'
+import { Facebook, Instagram, Mail } from 'lucide-react'
 
 import type { Footer } from '@/payload-types'
 
@@ -24,6 +25,40 @@ export async function Footer() {
             <Link className="flex items-center" href="/">
               <Logo />
             </Link>
+            {/* Social icons */}
+            <div className="flex items-center gap-4 text-muted-foreground">
+              {footerData?.facebook && (
+                <a
+                  href={footerData.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Facebook"
+                  className="hover:text-foreground transition-colors"
+                >
+                  <Facebook className="h-5 w-5" />
+                </a>
+              )}
+              {footerData?.instagram && (
+                <a
+                  href={footerData.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Instagram"
+                  className="hover:text-foreground transition-colors"
+                >
+                  <Instagram className="h-5 w-5" />
+                </a>
+              )}
+              {footerData?.email && (
+                <a
+                  href={`mailto:${footerData.email}`}
+                  aria-label="Email"
+                  className="hover:text-foreground transition-colors"
+                >
+                  <Mail className="h-5 w-5" />
+                </a>
+              )}
+            </div>
           </div>
 
           <div className="flex flex-col gap-4">

@@ -1715,6 +1715,18 @@ export interface Header {
  */
 export interface Footer {
   id: number;
+  /**
+   * Link to your Facebook profile or page (e.g., https://facebook.com/yourpage).
+   */
+  facebook?: string | null;
+  /**
+   * Link to your Instagram profile (e.g., https://instagram.com/yourhandle).
+   */
+  instagram?: string | null;
+  /**
+   * Public contact email to display in the footer.
+   */
+  email?: string | null;
   navItems?:
     | {
         link: {
@@ -1784,6 +1796,9 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
+  facebook?: T;
+  instagram?: T;
+  email?: T;
   navItems?:
     | T
     | {
