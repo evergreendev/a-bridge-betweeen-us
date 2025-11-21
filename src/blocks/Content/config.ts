@@ -6,6 +6,7 @@ import {
   InlineToolbarFeature,
   BlocksFeature,
   lexicalEditor,
+  UploadFeature,
 } from '@payloadcms/richtext-lexical'
 
 import { link } from '@/fields/link'
@@ -43,6 +44,21 @@ const columnFields: Field[] = [
         return [
           ...rootFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+          UploadFeature({
+            collections: {
+              media: {
+                // Example showing how to customize the built-in fields
+                // of the Upload feature
+                fields: [
+                  {
+                    name: 'caption',
+                    type: 'richText',
+                    editor: lexicalEditor(),
+                  },
+                ],
+              },
+            },
+          }),
           FixedToolbarFeature(),
           InlineToolbarFeature(),
           BlocksFeature({
