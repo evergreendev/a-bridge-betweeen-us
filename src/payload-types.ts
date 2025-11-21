@@ -1735,6 +1735,24 @@ export interface Footer {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Content to display in the right side of the footer. Supports headings, links, and formatting.
+   */
+  rightColumn?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -1780,6 +1798,7 @@ export interface FooterSelect<T extends boolean = true> {
             };
         id?: T;
       };
+  rightColumn?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

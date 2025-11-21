@@ -2,6 +2,12 @@ import type { GlobalConfig } from 'payload'
 
 import { link } from '@/fields/link'
 import { revalidateFooter } from './hooks/revalidateFooter'
+import {
+  FixedToolbarFeature,
+  HeadingFeature,
+  InlineToolbarFeature,
+  lexicalEditor,
+} from '@payloadcms/richtext-lexical'
 
 export const Footer: GlobalConfig = {
   slug: 'footer',
@@ -23,6 +29,22 @@ export const Footer: GlobalConfig = {
         components: {
           RowLabel: '@/Footer/RowLabel#RowLabel',
         },
+      },
+    },
+    {
+      name: 'rightColumn',
+      label: 'Right column (rich text)',
+      type: 'richText',
+      editor: lexicalEditor({
+        features: ({ rootFeatures }) => [
+          ...rootFeatures,
+          HeadingFeature({ enabledHeadingSizes: ['h3', 'h4'] }),
+          FixedToolbarFeature(),
+          InlineToolbarFeature(),
+        ],
+      }),
+      admin: {
+        description: 'Content to display in the right side of the footer. Supports headings, links, and formatting.',
       },
     },
   ],
