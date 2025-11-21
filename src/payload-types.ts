@@ -1716,6 +1716,23 @@ export interface Header {
 export interface Footer {
   id: number;
   /**
+   * Controls where the Donate button links to. Choose an internal page or enter a custom URL.
+   */
+  donate?: {
+    type?: ('reference' | 'custom') | null;
+    newTab?: boolean | null;
+    reference?:
+      | ({
+          relationTo: 'pages';
+          value: number | Page;
+        } | null)
+      | ({
+          relationTo: 'posts';
+          value: number | Post;
+        } | null);
+    url?: string | null;
+  };
+  /**
    * Link to your Facebook profile or page (e.g., https://facebook.com/yourpage).
    */
   facebook?: string | null;
@@ -1796,6 +1813,14 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
+  donate?:
+    | T
+    | {
+        type?: T;
+        newTab?: T;
+        reference?: T;
+        url?: T;
+      };
   facebook?: T;
   instagram?: T;
   email?: T;

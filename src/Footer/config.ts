@@ -15,6 +15,21 @@ export const Footer: GlobalConfig = {
     read: () => true,
   },
   fields: [
+    // Donate button link
+    link({
+      // We only need destination control; label comes from the UI, so hide label selector
+      disableLabel: true,
+      overrides: {
+        name: 'donate',
+        label: 'Donate button link',
+        admin: {
+          description:
+            'Controls where the Donate button links to. Choose an internal page or enter a custom URL.',
+        },
+      },
+      // Rendered as a button in the UI; appearance selection in admin is not necessary
+      appearances: false,
+    }),
     // Social links
     {
       name: 'facebook',

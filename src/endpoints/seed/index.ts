@@ -245,6 +245,10 @@ export const seed = async ({
     payload.updateGlobal({
       slug: 'footer',
       data: {
+        donate: {
+          type: 'custom',
+          url: 'https://example.org/donate',
+        },
         facebook: 'https://facebook.com/yourpage',
         instagram: 'https://instagram.com/yourhandle',
         email: 'hello@example.com',

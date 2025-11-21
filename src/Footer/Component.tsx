@@ -1,12 +1,10 @@
 import { getCachedGlobal } from '@/utilities/getGlobals'
-import Link from 'next/link'
 import React from 'react'
 import { Facebook, Instagram, Mail } from 'lucide-react'
 
 import type { Footer } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
-import { Logo } from '@/components/Logo/Logo'
 import RichText from '@/components/RichText'
 
 export async function Footer() {
@@ -22,9 +20,15 @@ export async function Footer() {
         <div className="grid gap-8 md:grid-cols-3 center">
           {/* Left column: logo + nav */}
           <div className="flex flex-col gap-4">
-            <Link className="flex items-center" href="/">
-              <Logo />
-            </Link>
+            {/* Donate button */}
+            {footerData?.donate && (
+              <CMSLink
+                appearance="default"
+                className="w-fit"
+                label="Donate"
+                {...footerData.donate}
+              />
+            )}
             {/* Social icons */}
             <div className="flex items-center gap-4 text-muted-foreground">
               {footerData?.facebook && (
