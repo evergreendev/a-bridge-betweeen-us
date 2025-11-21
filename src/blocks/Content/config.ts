@@ -89,6 +89,12 @@ export const Content: Block = {
   interfaceName: 'ContentBlock',
   fields: [
     {
+      name: 'narrowSection',
+      type: 'checkbox',
+      label: 'Narrow section (700px max width)',
+      defaultValue: false,
+    },
+    {
       name: 'columns',
       type: 'array',
       admin: {

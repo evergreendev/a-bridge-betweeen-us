@@ -16,6 +16,9 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
     backgroundImage,
   } = props
 
+  // New optional flag to render a narrow section (max width 700px)
+  const narrowSection = (props)?.narrowSection as boolean | undefined
+
   const colsSpanClasses = {
     full: '12',
     half: '6',
@@ -41,7 +44,13 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
       }}
       className={`${styleClasses[style!]}`}
     >
-      <div className="container grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16">
+      <div
+        className={cn(
+          // When narrow, constrain width to 700px and center it; otherwise use the default container
+          narrowSection ? 'mx-auto max-w-[700px] px-6' : 'container',
+          'grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16',
+        )}
+      >
         {columns &&
           columns.length > 0 &&
           columns.map((col, index) => {
