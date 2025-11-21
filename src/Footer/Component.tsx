@@ -19,7 +19,7 @@ export async function Footer() {
   return (
     <footer className="mt-auto border-t border-border bg-white text-black">
       <div className="container py-8">
-        <div className="grid gap-8 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-3 center">
           {/* Left column: logo + nav */}
           <div className="flex flex-col gap-4">
             <Link className="flex items-center" href="/">
@@ -61,7 +61,7 @@ export async function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-4 justify-center">
             <nav className="flex flex-col md:flex-row gap-4 md:items-center">
               {navItems.map(({ link }, i) => {
                 return <CMSLink className="" key={i} {...link} />
@@ -71,7 +71,7 @@ export async function Footer() {
 
           {/* Right column: rich text (optional) */}
           {rightColumn && (
-            <div className="md:justify-self-end">
+            <div className="flex flex-col justify-center">
               <RichText
                 data={rightColumn}
                 enableGutter={false}
