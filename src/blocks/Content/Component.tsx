@@ -19,6 +19,14 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
   // New optional flag to render a narrow section (max width 700px)
   const narrowSection = (props)?.narrowSection as boolean | undefined
 
+  // Optional vertical alignment for grid items: start | center | end (default: center)
+  const verticalAlign = ((props)?.verticalAlign as 'start' | 'center' | 'end' | undefined) ?? 'center'
+  const verticalAlignClasses: Record<'start' | 'center' | 'end', string> = {
+    start: 'items-start',
+    center: 'items-center',
+    end: 'items-end',
+  }
+
   const colsSpanClasses = {
     full: '12',
     half: '6',
@@ -49,6 +57,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
           // When narrow, constrain width to 700px and center it; otherwise use the default container
           narrowSection ? 'mx-auto max-w-[700px] px-6' : 'container',
           'grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16',
+          verticalAlignClasses[verticalAlign],
         )}
       >
         {columns &&

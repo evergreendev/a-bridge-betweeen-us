@@ -95,6 +95,17 @@ export const Content: Block = {
       defaultValue: false,
     },
     {
+      name: 'verticalAlign',
+      type: 'select',
+      label: 'Vertical alignment',
+      defaultValue: 'center',
+      options: [
+        { label: 'Start', value: 'start' },
+        { label: 'Center', value: 'center' },
+        { label: 'End', value: 'end' },
+      ],
+    },
+    {
       name: 'columns',
       type: 'array',
       admin: {

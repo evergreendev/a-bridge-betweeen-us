@@ -490,6 +490,7 @@ export interface CallToActionBlock {
  */
 export interface ContentBlock {
   narrowSection?: boolean | null;
+  verticalAlign?: ('start' | 'center' | 'end') | null;
   columns?:
     | {
         size?: ('oneThird' | 'half' | 'twoThirds' | 'full') | null;
@@ -1159,6 +1160,7 @@ export interface CallToActionBlockSelect<T extends boolean = true> {
  */
 export interface ContentBlockSelect<T extends boolean = true> {
   narrowSection?: T;
+  verticalAlign?: T;
   columns?:
     | T
     | {
