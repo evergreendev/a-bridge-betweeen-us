@@ -24,7 +24,7 @@ export async function Footer() {
             {footerData?.donate && (
               <CMSLink
                 appearance="default"
-                className="w-fit"
+                className="w-fit z-10"
                 label="Donate"
                 {...footerData.donate}
               />
