@@ -1,4 +1,5 @@
 import type { Metadata } from 'next/types'
+import { composeTitle } from '@/utilities/generateMeta'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
 import configPromise from '@payload-config'
@@ -81,8 +82,7 @@ export default async function Page({ searchParams: searchParamsPromise }: Args) 
   )
 }
 
-export function generateMetadata(): Metadata {
-  return {
-    title: `Payload Website Template Search`,
-  }
+export async function generateMetadata(): Promise<Metadata> {
+  const title = await composeTitle('Search')
+  return { title }
 }

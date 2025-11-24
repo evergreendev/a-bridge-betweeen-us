@@ -1,11 +1,13 @@
 import type { Metadata } from 'next'
 
-import type { Media, Page, Post, Config } from '../payload-types'
+import type { Media, Page, Post } from '@/payload-types'
 
 import { mergeOpenGraph } from './mergeOpenGraph'
 import { getServerSideURL } from './getURL'
+import configPromise from '@payload-config'
+import { getPayload } from 'payload'
 
-const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
+const getImageURL = (image?: Media | string | number | null) => {
   const serverUrl = getServerSideURL()
 
   let url = serverUrl + '/website-template-OG.webp'
@@ -19,16 +21,42 @@ const getImageURL = (image?: Media | Config['db']['defaultIDType'] | null) => {
   return url
 }
 
+let cachedSiteTitle: string | null = null
+
+export const getSiteTitle = async (): Promise<string> => {
+  if (cachedSiteTitle) return cachedSiteTitle
+  const payload = await getPayload({ config: configPromise })
+  try {
+    const siteGlobal = await payload.findGlobal({ slug: 'site' })
+    cachedSiteTitle = siteGlobal?.siteTitle || 'Site'
+  } catch (e) {
+    // If global not found or during build before migration, fall back safely
+    cachedSiteTitle = 'Site'
+  }
+  return cachedSiteTitle
+}
+
+export const composeTitle = async (
+  pageTitle?: string | null,
+  opts?: { isHome?: boolean },
+): Promise<string> => {
+  const siteTitle = await getSiteTitle()
+  if (opts?.isHome) return siteTitle
+  if (pageTitle && pageTitle.trim().length > 0) return `${siteTitle} - ${pageTitle}`
+  return siteTitle
+}
+
 export const generateMeta = async (args: {
   doc: Partial<Page> | Partial<Post> | null
+  isHome?: boolean
 }): Promise<Metadata> => {
-  const { doc } = args
+  const { doc, isHome: isHomeArg } = args
 
   const ogImage = getImageURL(doc?.meta?.image)
 
-  const title = doc?.meta?.title
-    ? doc?.meta?.title + ' | Payload Website Template'
-    : 'Payload Website Template'
+  const isHome = isHomeArg ?? ((doc as Partial<Page> | undefined)?.slug === 'home')
+  const pageTitle = doc?.meta?.title || (doc as Partial<Post> | Partial<Page> | undefined)?.title
+  const title = await composeTitle(pageTitle || null, { isHome })
 
   return {
     description: doc?.meta?.description,

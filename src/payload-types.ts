@@ -111,10 +111,12 @@ export interface Config {
   globals: {
     header: Header;
     footer: Footer;
+    site: Site;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    site: SiteSelect<false> | SiteSelect<true>;
   };
   locale: null;
   user: User & {
@@ -1787,6 +1789,19 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site".
+ */
+export interface Site {
+  id: number;
+  /**
+   * Primary site title used for page <title> composition and SEO.
+   */
+  siteTitle: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -1839,6 +1854,16 @@ export interface FooterSelect<T extends boolean = true> {
         id?: T;
       };
   rightColumn?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site_select".
+ */
+export interface SiteSelect<T extends boolean = true> {
+  siteTitle?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

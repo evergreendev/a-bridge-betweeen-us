@@ -1,4 +1,5 @@
 import type { Metadata } from 'next/types'
+import { composeTitle } from '@/utilities/generateMeta'
 
 import { CollectionArchive } from '@/components/CollectionArchive'
 import { PageRange } from '@/components/PageRange'
@@ -56,8 +57,7 @@ export default async function Page() {
   )
 }
 
-export function generateMetadata(): Metadata {
-  return {
-    title: `Payload Website Template Posts`,
-  }
+export async function generateMetadata(): Promise<Metadata> {
+  const title = await composeTitle('Posts')
+  return { title }
 }
