@@ -10,7 +10,7 @@ export default function Divider({ color = 'blue', className }: Props) {
   const colorClass = color === 'red' ? 'bg-brand-red' : 'bg-brand-blue'
   return (
     <div className={className}>
-      <div className={`mx-auto h-[2px] w-[250px] ${colorClass}`} />
+      <div className={`h-[2px] w-[250px] ${colorClass}`} />
     </div>
   )
 }
