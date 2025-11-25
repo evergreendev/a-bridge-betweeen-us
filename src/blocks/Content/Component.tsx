@@ -55,7 +55,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
       <div
         className={cn(
           // When narrow, constrain width to 700px and center it; otherwise use the default container
-          narrowSection ? 'mx-auto max-w-[700px] px-6' : 'container',
+          narrowSection ? 'mx-auto max-w-[950px] px-6' : 'container',
           'grid grid-cols-4 lg:grid-cols-12 gap-y-8 gap-x-16',
           verticalAlignClasses[verticalAlign],
         )}
@@ -67,7 +67,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
 
             return (
               <div
-                className={cn(`col-span-4 lg:col-span-${colsSpanClasses[size!]}`, {
+                className={cn(`col-span-4 max-w-[400px] lg:col-span-${colsSpanClasses[size!]}`, {
                   'md:col-span-2': size !== 'full',
                 })}
                 key={index}
