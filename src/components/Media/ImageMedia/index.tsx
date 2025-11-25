@@ -61,6 +61,24 @@ export const ImageMedia: React.FC<MediaProps> = (props) => {
       <NextImage
         alt={alt || ''}
         className={cn(imgClassName)}
+        /* Respect Payload focal point when provided */
+        style={(function () {
+          if (resource && typeof resource === 'object') {
+            const x = resource.focalX
+            const y = resource.focalY
+            if (typeof x === 'number' && typeof y === 'number') {
+              // Accept either 0–1 or 0–100 inputs
+              const toPct = (v: number) => {
+                const pct = v <= 1 ? v * 100 : v
+                return Math.max(0, Math.min(100, pct))
+              }
+
+              const pos = `${toPct(x)}% ${toPct(y)}%`
+              return { objectPosition: pos } as React.CSSProperties
+            }
+          }
+          return undefined
+        })()}
         fill={fill}
         height={!fill ? height : undefined}
         placeholder="blur"
