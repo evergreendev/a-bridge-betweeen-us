@@ -18,7 +18,9 @@ import type {
   CallToActionBlock as CTABlockProps,
   MediaBlock as MediaBlockProps,
   ImageCarousel as ImageCarouselProps,
+  DividerBlock as DividerBlockProps,
 } from '@/payload-types'
+import Divider from '@/blocks/Divider/Component'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ImageCarouselBlock } from '@/blocks/ImageCarousel/Component'
@@ -32,6 +34,7 @@ type NodeTypes =
       | BannerBlockProps
       | CodeBlockProps
       | ImageCarouselProps
+  | DividerBlockProps
     >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -63,6 +66,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     imageCarousel: ({ node }) => (
       <ImageCarouselBlock className="not-prose col-start-2" disableInnerContainer {...node.fields} />
     ),
+    divider: ({ node }) => <Divider {...(node.fields)} />,
   },
 })
 

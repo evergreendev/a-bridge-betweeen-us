@@ -7,10 +7,13 @@ import {
   BlocksFeature,
   lexicalEditor,
   UploadFeature,
+  OrderedListFeature,
+  UnorderedListFeature,
 } from '@payloadcms/richtext-lexical'
 
 import { link } from '@/fields/link'
 import { ImageCarousel } from '@/blocks/ImageCarousel/config'
+import { Divider } from '@/blocks/Divider/config'
 
 const columnFields: Field[] = [
   {
@@ -44,6 +47,9 @@ const columnFields: Field[] = [
         return [
           ...rootFeatures,
           HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
+          // Enable list features
+          UnorderedListFeature(),
+          OrderedListFeature(),
           UploadFeature({
             collections: {
               media: {
@@ -62,7 +68,7 @@ const columnFields: Field[] = [
           FixedToolbarFeature(),
           InlineToolbarFeature(),
           BlocksFeature({
-            blocks: [ImageCarousel],
+            blocks: [ImageCarousel, Divider],
           }),
         ]
       },
