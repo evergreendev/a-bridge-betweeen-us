@@ -128,10 +128,14 @@ const config = {
           css: [
             {
               h1: {
-                fontSize: '2.5rem',
+                fontSize: '2.75rem',
               },
               h2: {
-                fontSize: '1.25rem',
+                fontSize: '2.5rem',
+                fontWeight: 600,
+              },
+              h3: {
+                fontSize: '1.375rem',
                 fontWeight: 600,
               },
             },
@@ -141,9 +145,12 @@ const config = {
           css: [
             {
               h1: {
-                fontSize: '3.5rem',
+                fontSize: '4rem',
               },
               h2: {
+                fontSize: '3.5rem',
+              },
+              h3: {
                 fontSize: '1.5rem',
               },
             },

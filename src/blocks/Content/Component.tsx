@@ -117,7 +117,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
                 }}
                 data-col-index={index}
                 className={cn(
-                  `col-span-4 max-w-[400px] lg:col-span-${colsSpanClasses[size!]}`,
+                  `col-span-4 lg:col-span-${colsSpanClasses[size!]}`,
                   {
                     'md:col-span-2': size !== 'full',
                   },
