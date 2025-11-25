@@ -59,7 +59,7 @@ const Button: React.FC<ButtonProps> = ({
   const Comp = asChild ? Slot : 'button'
   return (
     <Comp className={cn(buttonVariants({ className, size, variant }))} ref={ref} {...props}>
-      <span className="relative z-[1] flex items-center gap-2">{children}</span>
+      {children}
     </Comp>
   )
 }
