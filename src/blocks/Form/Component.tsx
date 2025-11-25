@@ -114,7 +114,7 @@ export const FormBlock: React.FC<
   )
 
   return (
-    <div className="container lg:max-w-[48rem]">
+    <div className="container lg:max-w-screen-lg my-4">
       {enableIntro && introContent && !hasSubmitted && (
         <RichText className="mb-8 lg:mb-12" data={introContent} enableGutter={false} />
       )}
@@ -127,7 +127,8 @@ export const FormBlock: React.FC<
           {error && <div>{`${error.status || '500'}: ${error.message || ''}`}</div>}
           {!hasSubmitted && (
             <form id={formID} onSubmit={handleSubmit(onSubmit)}>
-              <div className="mb-4 last:mb-0">
+              {/* Grid layout so fields can sit side-by-side based on their Width */}
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
                 {formFromProps &&
                   formFromProps.fields &&
                   formFromProps.fields?.map((field, index) => {
@@ -135,8 +136,8 @@ export const FormBlock: React.FC<
                     const Field: React.FC<any> = fields?.[field.blockType as keyof typeof fields]
                     if (Field) {
                       return (
-                        <div className="mb-6 last:mb-0" key={index}>
                           <Field
+                            key={index}
                             form={formFromProps}
                             {...field}
                             {...formMethods}
@@ -144,14 +145,13 @@ export const FormBlock: React.FC<
                             errors={errors}
                             register={register}
                           />
-                        </div>
                       )
                     }
                     return null
                   })}
               </div>
 
-              <Button form={formID} type="submit" variant="default">
+              <Button className="mt-5" form={formID} type="submit" variant="default">
                 {submitButtonLabel}
               </Button>
             </form>
