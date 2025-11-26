@@ -201,7 +201,7 @@ export interface Page {
       | null;
     media?: (number | null) | Media;
   };
-  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | ImageCarousel)[];
+  layout: (CallToActionBlock | ContentBlock | MediaBlock | ArchiveBlock | FormBlock | ImageCarousel | Gallery)[];
   meta?: {
     title?: string | null;
     /**
@@ -810,6 +810,32 @@ export interface ImageCarousel {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Gallery".
+ */
+export interface Gallery {
+  images: {
+    media: number | Media;
+    /**
+     * Optional alt text to override the media alt.
+     */
+    alt?: string | null;
+    caption?: string | null;
+    id?: string | null;
+  }[];
+  /**
+   * Number of columns in the grid on larger screens.
+   */
+  columns?: number | null;
+  /**
+   * Spacing between images.
+   */
+  gap?: ('0' | '2' | '4' | '6') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'gallery';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -1117,6 +1143,7 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         imageCarousel?: T | ImageCarouselSelect<T>;
+        gallery?: T | GallerySelect<T>;
       };
   meta?:
     | T
@@ -1236,6 +1263,24 @@ export interface ImageCarouselSelect<T extends boolean = true> {
         caption?: T;
         id?: T;
       };
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "Gallery_select".
+ */
+export interface GallerySelect<T extends boolean = true> {
+  images?:
+    | T
+    | {
+        media?: T;
+        alt?: T;
+        caption?: T;
+        id?: T;
+      };
+  columns?: T;
+  gap?: T;
   id?: T;
   blockName?: T;
 }
