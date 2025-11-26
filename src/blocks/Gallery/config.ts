@@ -1,4 +1,4 @@
-import type { Block } from 'payload/types'
+import type { Block } from 'payload'
 
 export const Gallery: Block = {
   slug: 'gallery',
@@ -12,12 +12,6 @@ export const Gallery: Block = {
       name: 'images',
       type: 'array',
       required: true,
-      admin: {
-        components: {
-          RowLabel: ({ data, index }: { data: { caption?: string }; index: number }) =>
-            data?.caption || `Image ${index + 1}`,
-        },
-      },
       fields: [
         {
           name: 'media',
@@ -45,10 +39,10 @@ export const Gallery: Block = {
           name: 'columns',
           type: 'number',
           defaultValue: 3,
+          min: 2,
+          max: 6,
           admin: {
             step: 1,
-            min: 1,
-            max: 6,
             description: 'Number of columns in the grid on larger screens.',
           },
         },
