@@ -1,25 +1,9 @@
 import type { Metadata } from 'next'
 
-import type { Media, Page, Post } from '@/payload-types'
+import type { Page, Post } from '@/payload-types'
 
-import { mergeOpenGraph } from './mergeOpenGraph'
-import { getServerSideURL } from './getURL'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-
-const getImageURL = (image?: Media | string | number | null) => {
-  const serverUrl = getServerSideURL()
-
-  let url = serverUrl + '/website-template-OG.webp'
-
-  if (image && typeof image === 'object' && 'url' in image) {
-    const ogUrl = image.sizes?.og?.url
-
-    url = ogUrl ? serverUrl + ogUrl : serverUrl + image.url
-  }
-
-  return url
-}
 
 let cachedSiteTitle: string | null = null
 
@@ -52,26 +36,12 @@ export const generateMeta = async (args: {
 }): Promise<Metadata> => {
   const { doc, isHome: isHomeArg } = args
 
-  const ogImage = getImageURL(doc?.meta?.image)
-
   const isHome = isHomeArg ?? ((doc as Partial<Page> | undefined)?.slug === 'home')
   const pageTitle = doc?.meta?.title || (doc as Partial<Post> | Partial<Page> | undefined)?.title
   const title = await composeTitle(pageTitle || null, { isHome })
 
   return {
     description: doc?.meta?.description,
-    openGraph: mergeOpenGraph({
-      description: doc?.meta?.description || '',
-      images: ogImage
-        ? [
-            {
-              url: ogImage,
-            },
-          ]
-        : undefined,
-      title,
-      url: Array.isArray(doc?.slug) ? doc?.slug.join('/') : '/',
-    }),
     title,
   }
 }
