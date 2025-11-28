@@ -7,6 +7,7 @@ import React, { Fragment } from 'react'
 import type { Post } from '@/payload-types'
 
 import { Media } from '@/components/Media'
+import { CMSLink } from '@/components/Link'
 
 export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
 
@@ -32,7 +33,7 @@ export const Card: React.FC<{
   return (
     <article
       className={cn(
-        'border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer',
+        'overflow-hidden bg-card hover:cursor-pointer',
         className,
       )}
       ref={card.ref}
@@ -78,6 +79,9 @@ export const Card: React.FC<{
           </div>
         )}
         {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
+        <div className="mt-4">
+          <CMSLink appearance={"default"} url={href}>Read more</CMSLink>
+        </div>
       </div>
     </article>
   )
