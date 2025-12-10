@@ -25,7 +25,7 @@ export const UpdatesArchiveBlock: React.FC<Props> = async (props) => {
 
   return (
     <div
-      className="my-16 bg-gradient-to-t from-brand-blue from-60% to-transparent to-100% text-white pt-28"
+      className="pb-18 -mt-16 bg-gradient-to-t from-brand-blue from-80% to-transparent to-100% text-white pt-36"
       id={`block-${id}`}
     >
       {introContent && (
