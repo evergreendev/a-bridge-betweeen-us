@@ -10,6 +10,7 @@ import { MediaBlock } from '@/blocks/MediaBlock/Component'
 import { ImageCarouselBlock } from '@/blocks/ImageCarousel/Component'
 import { GalleryBlock } from '@/blocks/Gallery/Component'
 import { UpdatesArchiveBlock } from '@/blocks/UpdatesArchive/Component'
+import { EventsArchiveBlock } from '@/blocks/EventsArchive/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -20,6 +21,7 @@ const blockComponents = {
   imageCarousel: ImageCarouselBlock,
   gallery: GalleryBlock,
   updatesArchive: UpdatesArchiveBlock,
+  eventsArchive: EventsArchiveBlock,
 }
 
 export const RenderBlocks: React.FC<{
