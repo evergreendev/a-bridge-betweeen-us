@@ -18,7 +18,7 @@ export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
       {/* Desktop nav */}
       <div className="hidden md:flex w-full items-center justify-between gap-3 mr-2">
         {navItems.map(({ link }, i) => {
-          return <CMSLink key={i} className="text-2xl uppercase" {...link} appearance="link" />
+          return <CMSLink key={i} className="text-xl uppercase" {...link} appearance="link" />
         })}
         <CMSLink appearance={"default"} url={'/donate'}>
           Donate Now
