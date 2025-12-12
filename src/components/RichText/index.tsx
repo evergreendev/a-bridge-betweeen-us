@@ -19,11 +19,13 @@ import type {
   MediaBlock as MediaBlockProps,
   ImageCarousel as ImageCarouselProps,
   DividerBlock as DividerBlockProps,
+  DonationBlock as DonationBlockProps,
 } from '@/payload-types'
 import Divider from '@/blocks/Divider/Component'
 import { BannerBlock } from '@/blocks/Banner/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
 import { ImageCarouselBlock } from '@/blocks/ImageCarousel/Component'
+import { DonationBlock } from '@/blocks/Donation/Component'
 import { cn } from '@/utilities/ui'
 
 type NodeTypes =
@@ -34,7 +36,8 @@ type NodeTypes =
       | BannerBlockProps
       | CodeBlockProps
       | ImageCarouselProps
-  | DividerBlockProps
+      | DividerBlockProps
+      | DonationBlockProps
     >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -67,6 +70,7 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
       <ImageCarouselBlock className="not-prose col-start-2" disableInnerContainer {...node.fields} />
     ),
     divider: ({ node }) => <Divider {...(node.fields)} />,
+    donation: ({ node }) => <DonationBlock className="col-start-2" {...node.fields} />,
   },
 })
 

@@ -14,6 +14,7 @@ import {
 import { link } from '@/fields/link'
 import { ImageCarousel } from '@/blocks/ImageCarousel/config'
 import { Divider } from '@/blocks/Divider/config'
+import { Donation } from '@/blocks/Donation/config'
 
 const columnFields: Field[] = [
   {
@@ -68,7 +69,7 @@ const columnFields: Field[] = [
           FixedToolbarFeature(),
           InlineToolbarFeature(),
           BlocksFeature({
-            blocks: [ImageCarousel, Divider],
+            blocks: [ImageCarousel, Divider, Donation],
           }),
         ]
       },
