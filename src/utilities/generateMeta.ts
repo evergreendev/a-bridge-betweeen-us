@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import type { Page, Post } from '@/payload-types'
+import type { Page, Post, Event } from '@/payload-types'
 
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
@@ -31,7 +31,7 @@ export const composeTitle = async (
 }
 
 export const generateMeta = async (args: {
-  doc: Partial<Page> | Partial<Post> | null
+  doc: Partial<Page> | Partial<Post> | Partial<Event> | null
   isHome?: boolean
 }): Promise<Metadata> => {
   const { doc, isHome: isHomeArg } = args

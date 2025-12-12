@@ -1,15 +1,20 @@
 import type { CollectionConfig } from 'payload'
 
-import {
-  FixedToolbarFeature,
-  HeadingFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
+import { Archive } from '@/blocks/ArchiveBlock/config'
+import { UpdatesArchive } from '@/blocks/UpdatesArchive/config'
+import { EventsArchive } from '@/blocks/EventsArchive/config'
+import { CallToAction } from '@/blocks/CallToAction/config'
+import { Content } from '@/blocks/Content/config'
+import { FormBlock } from '@/blocks/Form/config'
+import { MediaBlock } from '@/blocks/MediaBlock/config'
+import { ImageCarousel } from '@/blocks/ImageCarousel/config'
+import { Gallery } from '@/blocks/Gallery/config'
 
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
 import { slugField } from 'payload'
+import { generatePreviewPath } from '@/utilities/generatePreviewPath'
+import { MetaDescriptionField, MetaImageField, MetaTitleField, OverviewField, PreviewField } from '@payloadcms/plugin-seo/fields'
 
 export const Events: CollectionConfig<'events'> = {
   slug: 'events',
@@ -29,6 +34,20 @@ export const Events: CollectionConfig<'events'> = {
   admin: {
     defaultColumns: ['title', 'startDate', 'endDate', 'slug', 'updatedAt'],
     useAsTitle: 'title',
+    livePreview: {
+      url: ({ data, req }) =>
+        generatePreviewPath({
+          slug: data?.slug,
+          collection: 'events',
+          req,
+        }),
+    },
+    preview: (data, { req }) =>
+      generatePreviewPath({
+        slug: data?.slug as string,
+        collection: 'events',
+        req,
+      }),
   },
   fields: [
     {
@@ -37,56 +56,105 @@ export const Events: CollectionConfig<'events'> = {
       required: true,
     },
     {
-      name: 'featuredImage',
-      type: 'upload',
-      relationTo: 'media',
-      required: false,
-      admin: {
-        position: 'sidebar',
-        description: 'Optional image to represent this event',
-      },
-      label: 'Featured Image (optional)',
-    },
-    {
-      name: 'content',
-      type: 'richText',
-      editor: lexicalEditor({
-        features: ({ rootFeatures }) => [
-          ...rootFeatures,
-          HeadingFeature({ enabledHeadingSizes: ['h2', 'h3', 'h4'] }),
-          FixedToolbarFeature(),
-          InlineToolbarFeature(),
-        ],
-      }),
-      label: 'Content',
-    },
-    {
-      name: 'startDate',
-      type: 'date',
-      required: false,
-      admin: {
-        position: 'sidebar',
-        date: {
-          pickerAppearance: 'dayOnly',
+      type: 'tabs',
+      tabs: [
+        {
+          fields: [
+            {
+              name: 'featuredImage',
+              type: 'upload',
+              relationTo: 'media',
+              required: false,
+              admin: {
+                description: 'Optional image to represent this event',
+              },
+              label: 'Featured Image (optional)',
+            },
+            {
+              name: 'layout',
+              type: 'blocks',
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                UpdatesArchive,
+                EventsArchive,
+                FormBlock,
+                ImageCarousel,
+                Gallery,
+              ],
+              required: true,
+              admin: {
+                initCollapsed: true,
+              },
+              label: 'Content',
+            },
+          ],
+          label: 'Content',
         },
-      },
-      label: 'Start Date (optional)',
-    },
-    {
-      name: 'endDate',
-      type: 'date',
-      required: false,
-      admin: {
-        position: 'sidebar',
-        date: {
-          pickerAppearance: 'dayOnly',
+        {
+          fields: [
+            {
+              name: 'startDate',
+              type: 'date',
+              required: false,
+              admin: {
+                position: 'sidebar',
+                date: {
+                  pickerAppearance: 'dayOnly',
+                },
+              },
+              label: 'Start Date (optional)',
+            },
+            {
+              name: 'endDate',
+              type: 'date',
+              required: false,
+              admin: {
+                position: 'sidebar',
+                date: {
+                  pickerAppearance: 'dayOnly',
+                },
+              },
+              label: 'End Date (optional)',
+            },
+          ],
+          label: 'Meta',
         },
-      },
-      label: 'End Date (optional)',
+        {
+          name: 'meta',
+          label: 'SEO',
+          fields: [
+            OverviewField({
+              titlePath: 'meta.title',
+              descriptionPath: 'meta.description',
+              imagePath: 'meta.image',
+            }),
+            MetaTitleField({
+              hasGenerateFn: true,
+            }),
+            MetaImageField({
+              relationTo: 'media',
+            }),
+            MetaDescriptionField({}),
+            PreviewField({
+              hasGenerateFn: true,
+              titlePath: 'meta.title',
+              descriptionPath: 'meta.description',
+            }),
+          ],
+        },
+      ],
     },
-    slugField(),
+    slugField()
   ],
   versions: {
-    drafts: true,
+    drafts: {
+      autosave: {
+        interval: 100,
+      },
+      schedulePublish: true,
+    },
   },
 }

@@ -1,19 +1,18 @@
 import type { CollectionConfig } from 'payload'
 
-import {
-  BlocksFeature,
-  FixedToolbarFeature,
-  HeadingFeature,
-  HorizontalRuleFeature,
-  InlineToolbarFeature,
-  lexicalEditor,
-} from '@payloadcms/richtext-lexical'
+import { slugField } from 'payload'
 
 import { authenticated } from '@/access/authenticated'
 import { authenticatedOrPublished } from '@/access/authenticatedOrPublished'
-import { Banner } from '@/blocks/Banner/config'
-import { Code } from '@/blocks/Code/config'
+import { Archive } from '@/blocks/ArchiveBlock/config'
+import { UpdatesArchive } from '@/blocks/UpdatesArchive/config'
+import { EventsArchive } from '@/blocks/EventsArchive/config'
+import { CallToAction } from '@/blocks/CallToAction/config'
+import { Content } from '@/blocks/Content/config'
+import { FormBlock } from '@/blocks/Form/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
+import { ImageCarousel } from '@/blocks/ImageCarousel/config'
+import { Gallery } from '@/blocks/Gallery/config'
 import { generatePreviewPath } from '@/utilities/generatePreviewPath'
 import { populateAuthors } from './hooks/populateAuthors'
 import { revalidateDelete, revalidatePost } from './hooks/revalidatePost'
@@ -26,7 +25,7 @@ import {
   OverviewField,
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
-import { slugField } from 'payload'
+// Removed richText editor features in favor of page-style layout blocks
 
 export const Posts: CollectionConfig<'posts'> = {
   slug: 'posts',
@@ -83,22 +82,14 @@ export const Posts: CollectionConfig<'posts'> = {
               relationTo: 'media',
             },
             {
-              name: 'content',
-              type: 'richText',
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                    BlocksFeature({ blocks: [Banner, Code, MediaBlock] }),
-                    FixedToolbarFeature(),
-                    InlineToolbarFeature(),
-                    HorizontalRuleFeature(),
-                  ]
-                },
-              }),
-              label: false,
+              name: 'layout',
+              type: 'blocks',
+              blocks: [CallToAction, Content, MediaBlock, Archive, UpdatesArchive, EventsArchive, FormBlock, ImageCarousel, Gallery],
               required: true,
+              admin: {
+                initCollapsed: true,
+              },
+              label: 'Content',
             },
           ],
           label: 'Content',

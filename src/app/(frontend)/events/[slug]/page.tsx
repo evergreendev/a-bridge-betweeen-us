@@ -4,7 +4,7 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
-import RichText from '@/components/RichText'
+import { RenderBlocks } from '@/blocks/RenderBlocks'
 import { PayloadRedirects } from '@/components/PayloadRedirects'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
 import { Media } from '@/components/Media'
@@ -69,9 +69,9 @@ export default async function EventPage({ params: paramsPromise }: Args) {
           ) : null}
         </header>
 
-        {event.content ? (
-          <div className="prose mt-8 mx-auto max-w-[48rem]">
-            <RichText data={event.content} enableGutter={false} />
+        {Array.isArray(event.layout) && event.layout.length > 0 ? (
+          <div className="mt-8 mx-auto max-w-[52rem]">
+            <RenderBlocks blocks={event.layout} />
           </div>
         ) : null}
       </div>
