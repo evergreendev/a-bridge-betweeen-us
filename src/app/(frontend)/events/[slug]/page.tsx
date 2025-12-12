@@ -58,8 +58,8 @@ export default async function EventPage({ params: paramsPromise }: Args) {
           <h1 className="text-3xl font-bold">{event.title}</h1>
           {(event.startDate || event.endDate) && (
             <p className="mt-2 text-sm opacity-80">
-              {event.startDate ? new Date(event.startDate).toLocaleString() : 'No start'}
-              {event.endDate ? ` — ${new Date(event.endDate).toLocaleString()}` : ''}
+              {event.startDate ? new Date(event.startDate).toLocaleDateString() : 'No start'}
+              {event.endDate ? ` — ${new Date(event.endDate).toLocaleDateString()}` : ''}
             </p>
           )}
           {event.featuredImage && typeof event.featuredImage !== 'string' ? (
