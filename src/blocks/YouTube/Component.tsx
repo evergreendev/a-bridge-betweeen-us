@@ -2,11 +2,11 @@ import React from 'react'
 import { cn } from '@/utilities/ui'
 
 type Props = {
-  url?: string
-  title?: string
-  caption?: string
-  className?: string
-  disableInnerContainer?: boolean
+  url: string
+  title?: string|null
+  caption?: string|null
+  className?: string|null
+  disableInnerContainer?: boolean|null
 }
 
 function extractYouTubeId(input?: string): string | undefined {
@@ -21,8 +21,7 @@ function extractYouTubeId(input?: string): string | undefined {
     if (host === 'youtube.com' || host === 'm.youtube.com' || host === 'music.youtube.com' || host === 'youtu.be' || host === 'youtube-nocookie.com') {
       // youtu.be/<id>
       if (host === 'youtu.be') {
-        const id = url.pathname.split('/').filter(Boolean)[0]
-        return id
+        return url.pathname.split('/').filter(Boolean)[0]
       }
 
       // /watch?v=<id>
