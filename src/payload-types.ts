@@ -215,6 +215,7 @@ export interface Page {
     | FormBlock
     | ImageCarousel
     | Gallery
+    | YouTubeBlock
   )[];
   meta?: {
     title?: string | null;
@@ -896,6 +897,21 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "YouTubeBlock".
+ */
+export interface YouTubeBlock {
+  /**
+   * Paste a full YouTube URL (watch, youtu.be, shorts) or a 11-character video ID
+   */
+  url: string;
+  title?: string | null;
+  caption?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'youtube';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "updates".
  */
 export interface Update {
@@ -1286,6 +1302,7 @@ export interface PagesSelect<T extends boolean = true> {
         formBlock?: T | FormBlockSelect<T>;
         imageCarousel?: T | ImageCarouselSelect<T>;
         gallery?: T | GallerySelect<T>;
+        youtube?: T | YouTubeBlockSelect<T>;
       };
   meta?:
     | T
@@ -1443,6 +1460,17 @@ export interface GallerySelect<T extends boolean = true> {
       };
   columns?: T;
   gap?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "YouTubeBlock_select".
+ */
+export interface YouTubeBlockSelect<T extends boolean = true> {
+  url?: T;
+  title?: T;
+  caption?: T;
   id?: T;
   blockName?: T;
 }

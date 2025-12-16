@@ -11,6 +11,7 @@ import { FormBlock } from '@/blocks/Form/config'
 import { MediaBlock } from '@/blocks/MediaBlock/config'
 import { ImageCarousel } from '@/blocks/ImageCarousel/config'
 import { Gallery } from '@/blocks/Gallery/config'
+import { YouTube } from '@/blocks/YouTube/config'
 import { hero } from '@/heros/config'
 import { slugField } from 'payload'
 import { populatePublishedAt } from '@/hooks/populatePublishedAt'
@@ -76,7 +77,7 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, UpdatesArchive, EventsArchive, FormBlock, ImageCarousel, Gallery],
+              blocks: [CallToAction, Content, MediaBlock, Archive, UpdatesArchive, EventsArchive, FormBlock, ImageCarousel, Gallery, YouTube],
               required: true,
               admin: {
                 initCollapsed: true,

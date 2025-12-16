@@ -12,6 +12,7 @@ import {
 } from '@payloadcms/richtext-lexical/react'
 
 import { CodeBlock, CodeBlockProps } from '@/blocks/Code/Component'
+import { YouTubeBlock } from '@/blocks/YouTube/Component'
 
 import type {
   CallToActionBlock as CTABlockProps,
@@ -19,6 +20,7 @@ import type {
   ImageCarousel as ImageCarouselProps,
   DividerBlock as DividerBlockProps,
   DonationBlock as DonationBlockProps,
+  YouTubeBlock as YouTubeBlockProps,
 } from '@/payload-types'
 import Divider from '@/blocks/Divider/Component'
 import { CallToActionBlock } from '@/blocks/CallToAction/Component'
@@ -35,6 +37,7 @@ type NodeTypes =
       | ImageCarouselProps
       | DividerBlockProps
       | DonationBlockProps
+      | YouTubeBlockProps
     >
 
 const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }) => {
@@ -64,6 +67,9 @@ const jsxConverters: JSXConvertersFunction<NodeTypes> = ({ defaultConverters }) 
     cta: ({ node }) => <CallToActionBlock {...node.fields} />,
     imageCarousel: ({ node }) => (
       <ImageCarouselBlock className="not-prose col-start-2" disableInnerContainer {...node.fields} />
+    ),
+    youtube: ({ node }) => (
+      <YouTubeBlock className="not-prose col-start-2" disableInnerContainer {...node.fields} />
     ),
     divider: ({ node }) => <Divider {...(node.fields)} />,
     donation: ({ node }) => <DonationBlock className="col-start-2" {...node.fields} />,
