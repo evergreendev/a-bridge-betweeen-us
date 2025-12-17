@@ -27,5 +27,15 @@ export const YouTube: Block = {
       type: 'text',
       required: false,
     },
+    {
+      name: 'thumbnail',
+      type: 'upload',
+      relationTo: 'media',
+      required: false,
+      label: 'Custom thumbnail (optional)',
+      admin: {
+        description: 'Optional image shown before playback. If omitted, the video will load immediately.',
+      },
+    },
   ],
 }

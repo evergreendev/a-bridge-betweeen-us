@@ -906,6 +906,10 @@ export interface YouTubeBlock {
   url: string;
   title?: string | null;
   caption?: string | null;
+  /**
+   * Optional image shown before playback. If omitted, the video will load immediately.
+   */
+  thumbnail?: (number | null) | Media;
   id?: string | null;
   blockName?: string | null;
   blockType: 'youtube';
@@ -1471,6 +1475,7 @@ export interface YouTubeBlockSelect<T extends boolean = true> {
   url?: T;
   title?: T;
   caption?: T;
+  thumbnail?: T;
   id?: T;
   blockName?: T;
 }
