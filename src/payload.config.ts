@@ -11,6 +11,7 @@ import { Media } from './collections/Media'
 import { Pages } from './collections/Pages'
 import { Posts } from './collections/Posts'
 import { Events } from './collections/Events'
+import { Merchandise } from './collections/Merchandise'
 import { Updates } from './collections/Updates'
 import { Users } from './collections/Users'
 import { Footer } from './Footer/config'
@@ -61,7 +62,7 @@ export default buildConfig({
       connectionString: process.env.DATABASE_URI || '',
     },
   }),
-  collections: [Pages, Posts, Updates, Events, Media, Categories, Users],
+  collections: [Pages, Posts, Updates, Events, Merchandise, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, Site],
   plugins: [

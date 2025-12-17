@@ -71,6 +71,7 @@ export interface Config {
     posts: Post;
     updates: Update;
     events: Event;
+    merchandise: Merchandise;
     media: Media;
     categories: Category;
     users: User;
@@ -95,6 +96,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     updates: UpdatesSelect<false> | UpdatesSelect<true>;
     events: EventsSelect<false> | EventsSelect<true>;
+    merchandise: MerchandiseSelect<false> | MerchandiseSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -212,6 +214,7 @@ export interface Page {
     | ArchiveBlock
     | UpdatesArchiveBlock
     | EventsArchiveBlock
+    | MerchandiseArchiveBlock
     | FormBlock
     | ImageCarousel
     | Gallery
@@ -897,6 +900,31 @@ export interface User {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MerchandiseArchiveBlock".
+ */
+export interface MerchandiseArchiveBlock {
+  introContent?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  limit?: number | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'merchandiseArchive';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "YouTubeBlock".
  */
 export interface YouTubeBlock {
@@ -977,6 +1005,42 @@ export interface Event {
     image?: (number | null) | Media;
     description?: string | null;
   };
+  /**
+   * When enabled, the slug will auto-generate from the title field on save and autosave.
+   */
+  generateSlug?: boolean | null;
+  slug: string;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "merchandise".
+ */
+export interface Merchandise {
+  id: number;
+  title: string;
+  featuredImage?: (number | null) | Media;
+  /**
+   * Price in your default currency
+   */
+  price: number;
+  description?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
@@ -1193,6 +1257,10 @@ export interface PayloadLockedDocument {
         value: number | Event;
       } | null)
     | ({
+        relationTo: 'merchandise';
+        value: number | Merchandise;
+      } | null)
+    | ({
         relationTo: 'media';
         value: number | Media;
       } | null)
@@ -1303,6 +1371,7 @@ export interface PagesSelect<T extends boolean = true> {
         archive?: T | ArchiveBlockSelect<T>;
         updatesArchive?: T | UpdatesArchiveBlockSelect<T>;
         eventsArchive?: T | EventsArchiveBlockSelect<T>;
+        merchandiseArchive?: T | MerchandiseArchiveBlockSelect<T>;
         formBlock?: T | FormBlockSelect<T>;
         imageCarousel?: T | ImageCarouselSelect<T>;
         gallery?: T | GallerySelect<T>;
@@ -1417,6 +1486,16 @@ export interface UpdatesArchiveBlockSelect<T extends boolean = true> {
  * via the `definition` "EventsArchiveBlock_select".
  */
 export interface EventsArchiveBlockSelect<T extends boolean = true> {
+  introContent?: T;
+  limit?: T;
+  id?: T;
+  blockName?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "MerchandiseArchiveBlock_select".
+ */
+export interface MerchandiseArchiveBlockSelect<T extends boolean = true> {
   introContent?: T;
   limit?: T;
   id?: T;
@@ -1564,6 +1643,21 @@ export interface EventsSelect<T extends boolean = true> {
         image?: T;
         description?: T;
       };
+  generateSlug?: T;
+  slug?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "merchandise_select".
+ */
+export interface MerchandiseSelect<T extends boolean = true> {
+  title?: T;
+  featuredImage?: T;
+  price?: T;
+  description?: T;
   generateSlug?: T;
   slug?: T;
   updatedAt?: T;
@@ -2188,6 +2282,10 @@ export interface TaskSchedulePublish {
       | ({
           relationTo: 'events';
           value: number | Event;
+        } | null)
+      | ({
+          relationTo: 'merchandise';
+          value: number | Merchandise;
         } | null);
     global?: string | null;
     user?: (number | null) | User;

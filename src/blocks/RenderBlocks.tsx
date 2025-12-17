@@ -11,6 +11,7 @@ import { ImageCarouselBlock } from '@/blocks/ImageCarousel/Component'
 import { GalleryBlock } from '@/blocks/Gallery/Component'
 import { UpdatesArchiveBlock } from '@/blocks/UpdatesArchive/Component'
 import { EventsArchiveBlock } from '@/blocks/EventsArchive/Component'
+import { MerchandiseArchiveBlock } from '@/blocks/MerchandiseArchive/Component'
 import { YouTubeBlock } from '@/blocks/YouTube/Component'
 
 const blockComponents = {
@@ -23,6 +24,7 @@ const blockComponents = {
   gallery: GalleryBlock,
   updatesArchive: UpdatesArchiveBlock,
   eventsArchive: EventsArchiveBlock,
+  merchandiseArchive: MerchandiseArchiveBlock,
   youtube: YouTubeBlock,
 }
 
