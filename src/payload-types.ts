@@ -853,15 +853,7 @@ export interface ImageCarousel {
  * via the `definition` "Gallery".
  */
 export interface Gallery {
-  images: {
-    media: number | Media;
-    /**
-     * Optional alt text to override the media alt.
-     */
-    alt?: string | null;
-    caption?: string | null;
-    id?: string | null;
-  }[];
+  images: (number | Media)[];
   /**
    * Number of columns in the grid on larger screens.
    */
@@ -1534,14 +1526,7 @@ export interface ImageCarouselSelect<T extends boolean = true> {
  * via the `definition` "Gallery_select".
  */
 export interface GallerySelect<T extends boolean = true> {
-  images?:
-    | T
-    | {
-        media?: T;
-        alt?: T;
-        caption?: T;
-        id?: T;
-      };
+  images?: T;
   columns?: T;
   gap?: T;
   id?: T;

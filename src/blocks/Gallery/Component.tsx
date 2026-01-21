@@ -4,14 +4,8 @@ import { cn } from '@/utilities/ui'
 import { Media as PayloadMedia } from '@/payload-types'
 import { Media } from '@/components/Media'
 
-type Item = {
-  media: PayloadMedia | string | number | null | undefined
-  alt?: string | null
-  caption?: string | null
-}
-
 type Props = {
-  images?: Item[]
+  images?: PayloadMedia[]
   columns?: number
   gap?: '0' | '2' | '4' | '6'
   className?: string
@@ -90,15 +84,10 @@ export const GalleryBlock: React.FC<Props> = (props) => {
             aria-label={`Open image ${i + 1} of ${total}`}
           >
             <Media
-              resource={item.media}
+              resource={item}
               imgClassName={cn('h-full w-full object-cover transition-transform duration-300 group-hover:scale-105')}
               htmlElement={null}
             />
-            {item.caption ? (
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-black/40 p-2 text-xs text-white">
-                {item.caption}
-              </div>
-            ) : null}
           </button>
         ))}
       </div>
@@ -116,15 +105,10 @@ export const GalleryBlock: React.FC<Props> = (props) => {
             onClick={(e) => e.stopPropagation()}
           >
             <Media
-              resource={images[clampedIndex]?.media}
+              resource={images[clampedIndex]}
               imgClassName={cn('max-h-[90vh] max-w-[90vw] object-contain rounded-md')}
               htmlElement={null}
             />
-            {images[clampedIndex]?.caption ? (
-              <div className="absolute inset-x-0 bottom-0 bg-black/50 p-3 text-sm text-white">
-                {images[clampedIndex]?.caption}
-              </div>
-            ) : null}
 
             {/* Controls */}
             <button

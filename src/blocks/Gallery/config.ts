@@ -10,27 +10,10 @@ export const Gallery: Block = {
   fields: [
     {
       name: 'images',
-      type: 'array',
+      type: 'upload',
+      hasMany: true,
+      relationTo: 'media',
       required: true,
-      fields: [
-        {
-          name: 'media',
-          type: 'upload',
-          relationTo: 'media',
-          required: true,
-        },
-        {
-          name: 'alt',
-          type: 'text',
-          admin: {
-            description: 'Optional alt text to override the media alt.',
-          },
-        },
-        {
-          name: 'caption',
-          type: 'text',
-        },
-      ],
     },
     {
       type: 'row',
