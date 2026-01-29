@@ -78,7 +78,7 @@ export const Card: React.FC<{
             </h3>
           </div>
         )}
-        {description && <div className="mt-2">{description && <p>{sanitizedDescription}</p>}</div>}
+        {description && <div className="mt-2 italic">&#34;{description && <p>{sanitizedDescription}</p>}&#34;</div>}
         <div className="mt-4">
           <CMSLink appearance={"default"} url={href}>Read more</CMSLink>
         </div>
