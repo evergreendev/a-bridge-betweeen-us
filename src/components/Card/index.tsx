@@ -32,10 +32,7 @@ export const Card: React.FC<{
 
   return (
     <article
-      className={cn(
-        'overflow-hidden bg-card hover:cursor-pointer',
-        className,
-      )}
+      className={cn('overflow-hidden bg-card hover:cursor-pointer', className)}
       ref={card.ref}
     >
       <div className="relative w-full ">
@@ -78,9 +75,15 @@ export const Card: React.FC<{
             </h3>
           </div>
         )}
-        {description && <div className="mt-2 italic">&#34;{description && <p>{sanitizedDescription}</p>}&#34;</div>}
+        {description && (
+          <div className="mt-2 italic">
+            {description && <p>&#34;{sanitizedDescription}&#34;</p>}
+          </div>
+        )}
         <div className="mt-4">
-          <CMSLink appearance={"default"} url={href}>Read more</CMSLink>
+          <CMSLink appearance={'default'} url={href}>
+            Read more
+          </CMSLink>
         </div>
       </div>
     </article>
