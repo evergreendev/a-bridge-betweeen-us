@@ -13,6 +13,7 @@ import { beforeSyncWithSearch } from '@/search/beforeSync'
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
 import { getSiteTitle } from '@/utilities/generateMeta'
+import { resendFormSubmissionsEndpoint } from '@/endpoints/resendFormSubmissions'
 
 const generateTitle: GenerateTitle<Post | Page> = async ({ doc }) => {
   const siteTitle = await getSiteTitle()
@@ -80,6 +81,14 @@ export const plugins: Plugin[] = [
           return field
         })
       },
+    },
+    formSubmissionOverrides: {
+      admin: {
+        components: {
+          beforeListTable: ['@/components/FormSubmissionBulkSend#FormSubmissionBulkSend'],
+        },
+      },
+      endpoints: [resendFormSubmissionsEndpoint],
     },
   }),
   searchPlugin({
